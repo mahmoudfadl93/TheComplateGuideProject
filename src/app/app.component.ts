@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TheComplateGuideProject';
+  loadedFeature = 'Recipes';
+
+  onNavigate(e) {
+    this.loadedFeature = e;
+  }
 }
