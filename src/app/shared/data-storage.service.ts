@@ -5,7 +5,7 @@ import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import { AuthService } from '../auth/auth.service';
-
+import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   constructor(
@@ -18,7 +18,7 @@ export class DataStorageService {
     const recipes = this.recipeService.getRecipes();
     this.http
       .put(
-        'https://recipe-book-405b8-default-rtdb.firebaseio.com/recipes.json',
+        environment.URlFirebase,
         recipes
       )
       .subscribe(response => {
@@ -29,7 +29,7 @@ export class DataStorageService {
   fetchRecipes() {
     return this.http
       .get<Recipe[]>(
-        'https://recipe-book-405b8-default-rtdb.firebaseio.com/recipes.json'
+        environment.URlFirebase
       )
       .pipe(
         map(recipes => {
